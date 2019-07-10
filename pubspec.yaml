@@ -11,12 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  chopper: ^2.4.0
+  provider: ^3.0.0+1
 
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  chopper_generator: ^2.4.0
+  build_runner:
+  
 
 
 
