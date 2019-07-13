@@ -1,11 +1,9 @@
 import 'package:chopper/chopper.dart';
-
-
-part 'authentication_service.chopper.dart';
+part 'api_authentication_service.chopper.dart';
 
 
 @ChopperApi()
-abstract class AuthenticationService extends ChopperService{
+abstract class ApiAuthenticationService extends ChopperService{
 
 
   /**
@@ -14,15 +12,15 @@ abstract class AuthenticationService extends ChopperService{
    * services - exposes all the http operations
    * converter - converts the json text to json objects
    */
-  static AuthenticationService create(){
+  static ApiAuthenticationService create(){
     final client = ChopperClient(baseUrl: "https://id-api-sb.erply.com/V1/Launchpad",
       services: [
-        _$AuthenticationService()
+        _$ApiAuthenticationService()
       ],
       converter: JsonConverter()
     );
 
-    return _$AuthenticationService(client);
+    return _$ApiAuthenticationService(client);
   }
 
   /**
@@ -81,8 +79,6 @@ abstract class AuthenticationService extends ChopperService{
    @Query('parameters[id]') int accountId,
    @Query('api[jwt]') String jwt
  );
-
-
 
 
 }

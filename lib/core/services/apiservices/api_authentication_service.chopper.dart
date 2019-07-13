@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'authentication_service.dart';
+part of 'api_authentication_service.dart';
 
 // **************************************************************************
 // ChopperGenerator
 // **************************************************************************
 
-class _$AuthenticationService extends AuthenticationService {
-  _$AuthenticationService([ChopperClient client]) {
+class _$ApiAuthenticationService extends ApiAuthenticationService {
+  _$ApiAuthenticationService([ChopperClient client]) {
     if (client == null) return;
     this.client = client;
   }
 
-  final definitionType = AuthenticationService;
+  final definitionType = ApiAuthenticationService;
 
   Future<Response> login(String email, String password) {
     final $url = '/login?{parameters[email]}&{parameters[password]}';

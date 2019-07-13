@@ -70,3 +70,27 @@
 // 3.53
 // 3.7
 // 3.6
+
+// {
+//     "result": {
+//         "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0X2lzcyI6bnVsbCwidF9wdCI6Ijc3M2NiY2JkY2QzNTMzYzQ3YTZmZDgwYWNhYTk3NzAyMjdhYjhkMzciLCJ0X2lzc3QiOjE1NjI4NjExMzIsInRfcnQiOiJiOGE4MzE5ZmJlNWYxZWIzN2RlYTg1NTVmNGYyZDNkNjU0YTExYWJlIiwidF90dGwiOjg2NDAwLCJpZF9lbSI6ImNoc2FhZGFobWVkOTNAZ21haWwuY29tIiwiaWRfdGlkIjoiIiwicGVybXMiOlsiaWRlbnRpdHktYWRtaW5cL21hbnVhbCIsImlkZW50aXR5LWFkbWluXC9Vc2VyU2V0dGluZ3NcL2dldFVzZXJJbmZvIiwiaWRlbnRpdHktYWRtaW5cL1VzZXJTZXR0aW5nc1wvZWRpdFVzZXJJbmZvIiwiaWRlbnRpdHktYWRtaW5cL1VzZXJTZXR0aW5nc1wvY2hhbmdlUGFzc3dvcmQiLCJpZGVudGl0eS1hZG1pblwvVXNlclNldHRpbmdzXC9oYXNQYXNzd29yZCIsImlkZW50aXR5LWFkbWluXC9JbnZpdGF0aW9uXC9nZXQiLCJpZGVudGl0eS1hZG1pblwvSW52aXRhdGlvblwvY29uZmlybSIsImlkZW50aXR5LWFkbWluXC9JbnZpdGF0aW9uXC9jYW5jZWwiLCJpZGVudGl0eS1hZG1pblwvTGF1bmNocGFkXC9hY2NvdW50QWNjZXNzIiwiaWRlbnRpdHktYWRtaW5cL0xhdW5jaHBhZFwvYXBwbGljYXRpb25zIiwiaWRlbnRpdHktYWRtaW5cL0xhdW5jaHBhZFwvbGF1bmNoIiwiaWRlbnRpdHktYWRtaW5cL0xhdW5jaHBhZFwvZmluZEFwcGxpY2F0aW9uIiwiaWRlbnRpdHktYWRtaW5cL0xhdW5jaHBhZFwvY3JlYXRlQ29tcGFueSIsImlkZW50aXR5LWFkbWluXC9MYXVuY2hwYWRcL2dldEFwcFJlcXVlc3RTdGF0dXMiLCJpZGVudGl0eS1hZG1pblwvTGF1bmNocGFkXC9yZXF1ZXN0QWNjZXNzIiwiaWRlbnRpdHktYWRtaW5cL0xhdW5jaHBhZFwvZ2V0VXNlckRlZmF1bHRDb21wYW55IiwiaWRlbnRpdHktYWRtaW5cL0xhdW5jaHBhZFwvZ2V0VXNlckNvbmZpcm1lZENvbXBhbmllcyIsImlkZW50aXR5LWFkbWluXC9MYXVuY2hwYWRcL3NldFVzZXJEZWZhdWx0Q29tcGFueSIsImlkZW50aXR5LWFkbWluXC9MYXVuY2hwYWRcL2dldEJhZGdlSW5mbyJdLCJ0X3YiOjIsInRfaXR2IjpbXX0.ajG-d75USBR3-LIuoX5YByczcBC2LpA7F3ZCmMre6w3LRh0x88RWM0dvdh6YceQXMFKzIgEigMeP1Ydhg2VZFBuZMX7yoVzMyAf80g7T_9a1gsClHvgIMZpRN0o1nHT_JZuUzjYsIIj-PbwbVe29LSBIoZJiQorQhn1A9hCUEwxmrALOXfeIAEViYw2p6oldMZMsh4uev01s1oVF1H6Dbo36oA_UadsNCZ1jlzsqSXXFD919QOUeu9MHejtEqbBb05Kj-1ufgBq6LRRnEwMBhd2VgW7aFiCsYBdow1oGiWncs2xC1-s-Tj2KeKpVwHFeQyMPTYTjwcYdlOJU0dSuZA",
+//         "isNewUser": false,
+//         "defaultCompanyId": 183
+//     },
+//     "api": {
+//         "time": 1562861132,
+//         "uniqueId": "XSdeTJz9v4ZrF6lnT9rOqQAAAAM",
+//         "cache": {
+//             "cached": false,
+//             "ttl": null,
+//             "expires": null
+//         },
+//         "path": "V1/Launchpad/login",
+//         "generationTime": "0.114"
+//     },
+//     "error": {
+//         "message": "OK",
+//         "code": null
+//     }
+// }
+

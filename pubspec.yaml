@@ -6,13 +6,15 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   chopper: ^2.4.0
   provider: ^3.0.0+1
+  built_value:
+  built_collection:
 
   cupertino_icons: ^0.1.2
 
@@ -21,6 +23,8 @@ dev_dependencies:
     sdk: flutter
   chopper_generator: ^2.4.0
   build_runner:
+  built_value_generator:
+
   
 
 
@@ -28,7 +32,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets: 
-    - images\Frame.png
+    - images/receptionist.png
+    - images/key.png
 
   
   
