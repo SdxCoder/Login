@@ -6,6 +6,7 @@ import 'package:erply_assignment/ui/shared/app_theme.dart';
 import 'package:erply_assignment/ui/shared/app_theme.dart' as prefix0;
 import 'package:erply_assignment/ui/views/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -15,12 +16,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: providers,
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-           primaryColor: primaryColor
-          ),
-          home: LayoutPanel()),
+      child: OverlaySupport(
+              child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+             primaryColor: primaryColor
+            ),
+            home: LayoutPanel()),
+      ),
     );
   }
 }

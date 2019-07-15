@@ -14,7 +14,7 @@ class AuthenticationService {
     var response = await _apiAuthenticationService.login(email, password);
 
     LoginResponse loginResponse =
-        serializers.deserializeWith(LoginResponse.serializer, json.decode(response.body));
+        serializers.deserializeWith(LoginResponse.serializer, response.body);
 
     var hasJwt = loginResponse.result.jwt != null;
 

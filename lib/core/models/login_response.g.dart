@@ -60,11 +60,13 @@ class _$ResultSerializer implements StructuredSerializer<Result> {
   @override
   Iterable<Object> serialize(Serializers serializers, Result object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'jwt',
-      serializers.serialize(object.jwt, specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object>[];
+    if (object.jwt != null) {
+      result
+        ..add('jwt')
+        ..add(serializers.serialize(object.jwt,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -187,11 +189,7 @@ class _$Result extends Result {
   factory _$Result([void Function(ResultBuilder) updates]) =>
       (new ResultBuilder()..update(updates)).build();
 
-  _$Result._({this.jwt}) : super._() {
-    if (jwt == null) {
-      throw new BuiltValueNullFieldError('Result', 'jwt');
-    }
-  }
+  _$Result._({this.jwt}) : super._();
 
   @override
   Result rebuild(void Function(ResultBuilder) updates) =>

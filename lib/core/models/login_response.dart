@@ -16,6 +16,7 @@ abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilde
 abstract class Result implements Built<Result, ResultBuilder> {
   static Serializer<Result> get serializer => _$resultSerializer;
   
+  @nullable
   String get jwt;
 
   Result._();
