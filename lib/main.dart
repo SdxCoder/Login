@@ -16,14 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: providers,
-      child: OverlaySupport(
-              child: MaterialApp(
+      child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
              primaryColor: primaryColor
             ),
             home: LayoutPanel()),
-      ),
     );
   }
 }

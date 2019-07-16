@@ -16,6 +16,7 @@ dependencies:
   built_value:
   built_collection:
   overlay_support: ^1.0.0
+  flushbar:
 
   cupertino_icons: ^0.1.2
 
