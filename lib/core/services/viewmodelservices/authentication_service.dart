@@ -7,7 +7,12 @@ import 'package:erply_assignment/core/services/apiservices/api_authentication_se
 import 'package:erply_assignment/core/services/localstorageservice/login_localstorage_service.dart';
 import 'package:erply_assignment/core/services/localstorageservice/shared_prefernces.dart';
 
+/**
+ * A service to be consumed by the login-view-model
+ */
+
 class AuthenticationService {
+
   final ApiAuthenticationService apiAuthenticationService;
 
   AuthenticationService({this.apiAuthenticationService});
@@ -17,15 +22,23 @@ class AuthenticationService {
   LoginResponse get user => _user;
 
 
-
+  /**
+   * login method
+   * Uses params to authenticate user 
+   * Returns false if jwt is null
+   */
   Future<bool> login(String email, String password) async {
     var response = await apiAuthenticationService.login(email, password);
 
-    LoginResponse loginResponse =
-        serializers.deserializeWith(LoginResponse.serializer, response.body);
+
+
+    // Deserializing the response to model - Login Response
+
+    LoginResponse loginResponse = serializers.deserializeWith(LoginResponse.serializer, response.body);
 
     var hasJwt = loginResponse.result.jwt != null;
-
+    
+    // if jwt in not null, save the loginResponse
     if(hasJwt){
       _user = loginResponse;
     }

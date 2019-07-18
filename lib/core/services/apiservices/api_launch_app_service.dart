@@ -7,6 +7,14 @@ part 'api_launch_app_service.chopper.dart';
 @ChopperApi()
 abstract class ApiLaunchAppService extends ChopperService{
 
+
+   /**
+   * create method
+   * Instantiate ChopperClient with a baseUrl, services, and conveter
+   * services - exposes all the http operations
+   * converter - converts the json text to json objects
+   */
+
   static ApiLaunchAppService create(){
      final client = ChopperClient(
       services: [
@@ -21,6 +29,11 @@ abstract class ApiLaunchAppService extends ChopperService{
     return _$ApiLaunchAppService(client);
   }
  
+  /**
+   * launchApp method
+   * it uses params to launch the cloud application
+   * @param url and launchCode are parameters for this method
+   */
 
   @Get(path: '{url}{launchCode}')
   Future<Response> launchApp(

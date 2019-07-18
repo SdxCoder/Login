@@ -2,10 +2,16 @@ import 'dart:async';
 import 'package:chopper/chopper.dart';
 
 class LaunchAppInterceptor implements ResponseInterceptor {
+
+
+  /**
+   * Method override
+   * It uses params (response) to extract the header-value of set-Cookie
+   * to further extract XSRF-TOKEN and JSESSIONID sent by server with response headers
+   */
   @override
   FutureOr<Response> onResponse(Response response) {
-    // TODO: implement onResponse
-
+     
     if (response.statusCode == 200) {
       Map<String, String> headers = {};
       String rawCookie = response.headers['set-cookie'];

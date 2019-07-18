@@ -6,10 +6,15 @@ import 'package:erply_assignment/core/services/localstorageservice/shared_prefer
 
 class LoginStorageService extends LocalStorageService{
 
-  static const String LoginKey = "login";
+  // constant for the LoginResponse key
 
+  static const String LoginKey = "login";
   
 
+  /**
+   * getLoginResponse method
+   * overrides the getFromDisk method to get the saved login details
+   */
 
   LoginResponse get getloginResponse{
     var loginJson = getFromDisk(LoginKey);
@@ -17,6 +22,13 @@ class LoginStorageService extends LocalStorageService{
       return null;
     }
   }
+
+  
+  /**
+   * saveLoginResponse method
+   * overrides the saveToFromDisk method to save loginResponse to local Storage 
+   * for automatic login later on.
+   */
 
   void saveloginResponse(LoginResponse loginResponse){
     saveToDisk(LoginKey, loginResponse);

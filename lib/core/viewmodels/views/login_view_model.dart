@@ -3,6 +3,11 @@ import 'package:erply_assignment/core/services/viewmodelservices/authentication_
 import 'package:erply_assignment/core/services/viewmodelservices/connectivity_service.dart';
 import 'package:flutter/cupertino.dart';
 
+
+/**
+ * Login View Model
+ * Wraps the login-view to provide the needed services
+ */
 class LoginViewModel extends ChangeNotifier {
   AuthenticationService _authenticationService;
   ConnectivityService _connectivityService;
@@ -28,6 +33,11 @@ class LoginViewModel extends ChangeNotifier {
     _loginTries = counter;
   }
 
+  /**
+   * Authenticates user using authentication service 
+   * and returns hasJwt 
+   */
+
   Future<bool> login(String email, String password) async {
     checkConnectivity();
     _setBuzy(true);
@@ -44,6 +54,11 @@ class LoginViewModel extends ChangeNotifier {
 
     return hasJwt;
   }
+  
+  /**
+   * Checks the network status using connectivitService
+   * Returns true if netwrok , false if no netwrork
+   */
 
   Future<bool> checkConnectivity() async {
     NetworkStatus status = await _connectivityService.checkConnectivity();
@@ -55,6 +70,10 @@ class LoginViewModel extends ChangeNotifier {
     }
   }
 
+  /**
+   * Manages the number of times user tries to login
+   * and increments the counter
+   */
 
   void _manageLoginTries(hasJwt) {
     if (hasJwt == false) {
@@ -62,6 +81,10 @@ class LoginViewModel extends ChangeNotifier {
     }
   }
 
+ /**
+  * sets buzy status to true of false
+  * and notifies the listneres to which view-model is registered with
+  */
   void _setBuzy(bool value) {
     _buzy = value;
     notifyListeners();

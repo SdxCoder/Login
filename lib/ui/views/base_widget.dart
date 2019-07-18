@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
+
 class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
   final T model;
   final Widget child;

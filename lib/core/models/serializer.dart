@@ -3,6 +3,10 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'package:erply_assignment/core/models/login_response.dart';
 part 'serializer.g.dart';
 
+
+/**
+ * Registering serializers for the all models
+ */
 @SerializersFor(const [
   LoginResponse,
 ])

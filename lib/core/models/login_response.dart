@@ -1,8 +1,11 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:built_collection/built_collection.dart';
 
 part 'login_response.g.dart';
+
+/**
+ * Model Class for login response
+ */
 
 abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilder> {
   static Serializer<LoginResponse> get serializer => _$loginResponseSerializer;

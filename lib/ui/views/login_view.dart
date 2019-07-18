@@ -229,7 +229,9 @@ class _LoginViewState extends State<LoginView> {
                         _emailController.clear();
 
                         _passwordController.clear();
-                      } else {
+                      } 
+                      else {
+                        
                         if (model.loginTries > 3) {
                           NotificationService.tooManyTries(context);
                         } else {
