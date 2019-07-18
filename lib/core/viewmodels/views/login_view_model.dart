@@ -1,3 +1,4 @@
+import 'package:erply_assignment/core/services/localstorageservice/login_localstorage_service.dart';
 import 'package:erply_assignment/core/services/viewmodelservices/authentication_service.dart';
 import 'package:erply_assignment/core/services/viewmodelservices/connectivity_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,20 +6,22 @@ import 'package:flutter/cupertino.dart';
 class LoginViewModel extends ChangeNotifier {
   AuthenticationService _authenticationService;
   ConnectivityService _connectivityService;
+  LoginStorageService _loginStorageService;
 
   bool _buzy = false;
-  bool _networkStatus = true;
   int _loginTries = 0;
 
   LoginViewModel(
       {@required AuthenticationService authenticationService,
-      @required ConnectivityService connectivityService}) {
+      @required ConnectivityService connectivityService,
+      @required LoginStorageService loginStorageService
+     }) {
     _authenticationService = authenticationService;
     _connectivityService = connectivityService;
+    _loginStorageService = loginStorageService;
   }
 
   bool get buzy => _buzy;
-  bool get networkStatus => _networkStatus;
   int get loginTries => _loginTries;
 
   void setCounter(counter) {
@@ -29,14 +32,17 @@ class LoginViewModel extends ChangeNotifier {
     checkConnectivity();
     _setBuzy(true);
 
-    var userAuthenticated =
-        await _authenticationService.login(email.trim(), password.trim());
+    var hasJwt = await _authenticationService.login(email.trim(), password.trim());
 
-    _manageLoginTries(userAuthenticated);
+    if(hasJwt){
+       _loginStorageService.saveloginResponse(_authenticationService.user);
+    }
+
+    _manageLoginTries(hasJwt);
 
     _setBuzy(false);
 
-    return userAuthenticated;
+    return hasJwt;
   }
 
   Future<bool> checkConnectivity() async {
@@ -49,6 +55,7 @@ class LoginViewModel extends ChangeNotifier {
     }
   }
 
+
   void _manageLoginTries(hasJwt) {
     if (hasJwt == false) {
       _loginTries++;
@@ -58,9 +65,5 @@ class LoginViewModel extends ChangeNotifier {
   void _setBuzy(bool value) {
     _buzy = value;
     notifyListeners();
-  }
-
-  void _setNetworkStatus(bool value) {
-    _networkStatus = value;
   }
 }

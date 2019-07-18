@@ -7,11 +7,9 @@ import 'app_theme.dart';
 enum NotificationType { INFO, ACTION }
 
 class NotificationService {
-  
   static Flushbar notification(
       BuildContext context, String titleText, String messageText,
       {NotificationType notificationType = NotificationType.ACTION}) {
-
     Flushbar flush;
 
     if (notificationType == NotificationType.INFO) {
@@ -30,6 +28,7 @@ class NotificationService {
             color: Colors.white,
           ),
         ),
+        backgroundColor: Theme.of(context).primaryColorDark,
         flushbarStyle: FlushbarStyle.FLOATING,
         flushbarPosition: FlushbarPosition.TOP,
         aroundPadding: EdgeInsets.all(8),
@@ -68,6 +67,7 @@ class NotificationService {
             "DISMIS",
             style: Theme.of(context).textTheme.button,
           )),
+      backgroundColor: Theme.of(context).primaryColorDark,
       flushbarStyle: FlushbarStyle.FLOATING,
       flushbarPosition: FlushbarPosition.TOP,
       aroundPadding: EdgeInsets.all(8),
@@ -90,7 +90,8 @@ class NotificationService {
   }
 
   static Flushbar loginSuccess(BuildContext context) {
-    notification(context, "Success", "Logged-in successfully!", notificationType: NotificationType.INFO);
+    notification(context, "Success", "Logged-in successfully!",
+        notificationType: NotificationType.INFO);
   }
 
   static Flushbar tooManyTries(BuildContext context) {

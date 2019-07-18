@@ -75,7 +75,9 @@ class _LoginViewState extends State<LoginView> {
     return BaseWidget(
         model: LoginViewModel(
             authenticationService: Provider.of(context),
-            connectivityService: Provider.of(context)),
+           connectivityService: Provider.of(context),
+           loginStorageService: Provider.of(context)
+            ),
         child: null,
         builder: (context, model, child) {
           return Scaffold(

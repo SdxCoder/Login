@@ -1,4 +1,6 @@
 import 'package:erply_assignment/core/services/apiservices/api_authentication_service.dart';
+import 'package:erply_assignment/core/services/localstorageservice/login_localstorage_service.dart';
+import 'package:erply_assignment/core/services/localstorageservice/shared_prefernces.dart';
 import 'package:erply_assignment/core/services/viewmodelservices/authentication_service.dart';
 import 'package:erply_assignment/core/services/viewmodelservices/connectivity_service.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +28,9 @@ List<SingleChildCloneableWidget> independentServices = [
   ),
   Provider.value(
     value: ConnectivityService(),
+  ),
+  Provider.value(
+    value: LoginStorageService()
   )
 ];
 
@@ -36,13 +41,11 @@ List<SingleChildCloneableWidget> independentServices = [
 
 List<SingleChildCloneableWidget> dependentServices = [
 
-
   // Inject apiauthenticationservice to authenticationservice
-  ProxyProvider<ApiAuthenticationService, AuthenticationService>(
+  ProxyProvider<ApiAuthenticationService,AuthenticationService>(
       builder: (context, api, authenticationService) {
-    return AuthenticationService(api: api);
+    return AuthenticationService(apiAuthenticationService: api);
   }),
-  
 
 ];
 

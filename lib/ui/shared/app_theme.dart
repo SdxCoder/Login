@@ -8,7 +8,7 @@ final overlayColor = const Color(0xff000000).withAlpha(150);
 
 ThemeData themeData = ThemeData(
     primaryColor: Color(hexColor('#f6cc60')),
-    primaryColorDark: Color(hexColor('c29c39')),
+    primaryColorDark: Color(hexColor('312914')),
     accentColor: Color(hexColor('006cff')),
     buttonColor: Color(hexColor('006cff')),
     splashColor: Color(hexColor('c29c39')),
