@@ -15,7 +15,7 @@ class _$ApiLaunchAppService extends ApiLaunchAppService {
   final definitionType = ApiLaunchAppService;
 
   Future<Response> launchApp(String url, String launchCode) {
-    final $url = '/${url}{launchCode}';
+    final $url = '${url}{launchCode}';
     final Map<String, dynamic> $params = {'launchCode': launchCode};
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);

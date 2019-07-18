@@ -14,23 +14,22 @@ class _$ApiService extends ApiService {
 
   final definitionType = ApiService;
 
+  Future<Response> directAuthentication() {
+    final $url = 'capture';
+    final $request = Request('GET', $url, client.baseUrl);
+    return client.send<dynamic, dynamic>($request);
+  }
+
   Future<Response> getCurrentUser() {
-    final $url = '/00000053-a2ca8401-jxrtagdj/core/user';
+    final $url = '00000053-a2ca8401-jxrtagdj/core/user';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
 
   Future<Response> getAppUsers(String table) {
-    final $url = '/00000053-a2ca8401-jxrtagdj/{table}';
+    final $url = '00000053-a2ca8401-jxrtagdj/{table}';
     final Map<String, dynamic> $params = {'table': table};
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
-    return client.send<dynamic, dynamic>($request);
-  }
-
-  Future<Response> directAuthentication(String jwt) {
-    final $url = '/tabel';
-    final $body = jwt;
-    final $request = Request('GET', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
 }

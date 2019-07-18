@@ -2,22 +2,21 @@ import 'dart:io';
 
 import 'package:erply_assignment/core/viewmodels/views/login_view_model.dart';
 import 'package:erply_assignment/ui/shared/app_theme.dart';
-import 'package:erply_assignment/ui/shared/app_theme.dart' as prefix0;
 import 'package:erply_assignment/ui/shared/notification_service.dart';
 import 'package:erply_assignment/ui/shared/ui_utils.dart';
+import 'package:erply_assignment/ui/views/adduser_view.dart';
 import 'package:erply_assignment/ui/views/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:overlay_support/overlay_support.dart';
-import 'package:flushbar/flushbar.dart';
 
 class LoginView extends StatefulWidget {
   final double margins;
   final double gutters;
   final int columns;
-  const LoginView({Key key, this.margins, this.gutters, this.columns}) : super(key: key);
+  const LoginView({Key key, this.margins, this.gutters, this.columns})
+      : super(key: key);
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -27,13 +26,12 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-
   @override
-  void initState() { 
+  void initState() {
     super.initState();
-     SystemChrome.setPreferredOrientations([
+    SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
-  ]);
+    ]);
   }
 
   Widget _AppBar(BuildContext context) {
@@ -75,9 +73,8 @@ class _LoginViewState extends State<LoginView> {
     return BaseWidget(
         model: LoginViewModel(
             authenticationService: Provider.of(context),
-           connectivityService: Provider.of(context),
-           loginStorageService: Provider.of(context)
-            ),
+            connectivityService: Provider.of(context),
+            loginStorageService: Provider.of(context)),
         child: null,
         builder: (context, model, child) {
           return Scaffold(
@@ -91,12 +88,8 @@ class _LoginViewState extends State<LoginView> {
                         width: Grid.giveColSpan(4),
                         child: Column(
                           children: <Widget>[
-                          
-                            Image.asset(
-                              'images/receptionist.png',
-                              width: Grid.giveColSpan(3, increaseBy: 30)
-                              
-                            ),
+                            Image.asset('images/receptionist.png',
+                                width: Grid.giveColSpan(3, increaseBy: 30)),
                             SizedBox(
                               height: widget.gutters,
                             ),
@@ -131,9 +124,10 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                   ),
                                 )),
-                                SizedBox(height: widget.gutters,)
+                            SizedBox(
+                              height: widget.gutters,
+                            )
                           ],
-                        
                         ),
                       ),
                     ),
@@ -213,7 +207,7 @@ class _LoginViewState extends State<LoginView> {
 
                       var hasNetwork = await model.checkConnectivity();
 
-                      if(!hasNetwork){
+                      if (!hasNetwork) {
                         NotificationService.networkError(context);
                         return;
                       }
@@ -229,9 +223,17 @@ class _LoginViewState extends State<LoginView> {
                         _emailController.clear();
 
                         _passwordController.clear();
-                      } 
-                      else {
-                        
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddUserView(
+                                margins: widget.margins,
+                                gutters: widget.gutters,
+                                columns: widget.columns,
+                              )),
+                        );
+                      } else {
                         if (model.loginTries > 3) {
                           NotificationService.tooManyTries(context);
                         } else {

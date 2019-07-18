@@ -1,6 +1,7 @@
 import 'package:erply_assignment/core/services/localstorageservice/login_localstorage_service.dart';
 import 'package:erply_assignment/core/services/viewmodelservices/authentication_service.dart';
 import 'package:erply_assignment/core/services/viewmodelservices/connectivity_service.dart';
+import 'package:erply_assignment/core/viewmodels/base_model.dart';
 import 'package:flutter/cupertino.dart';
 
 
@@ -8,7 +9,7 @@ import 'package:flutter/cupertino.dart';
  * Login View Model
  * Wraps the login-view to provide the needed services
  */
-class LoginViewModel extends ChangeNotifier {
+class LoginViewModel extends BaseModel {
   AuthenticationService _authenticationService;
   ConnectivityService _connectivityService;
   LoginStorageService _loginStorageService;
@@ -40,8 +41,7 @@ class LoginViewModel extends ChangeNotifier {
 
   Future<bool> login(String email, String password) async {
     checkConnectivity();
-    _setBuzy(true);
-
+    setBusy(true);
     var hasJwt = await _authenticationService.login(email.trim(), password.trim());
 
     if(hasJwt){
@@ -50,7 +50,7 @@ class LoginViewModel extends ChangeNotifier {
 
     _manageLoginTries(hasJwt);
 
-    _setBuzy(false);
+    setBusy(false);
 
     return hasJwt;
   }
@@ -79,14 +79,5 @@ class LoginViewModel extends ChangeNotifier {
     if (hasJwt == false) {
       _loginTries++;
     }
-  }
-
- /**
-  * sets buzy status to true of false
-  * and notifies the listneres to which view-model is registered with
-  */
-  void _setBuzy(bool value) {
-    _buzy = value;
-    notifyListeners();
   }
 }

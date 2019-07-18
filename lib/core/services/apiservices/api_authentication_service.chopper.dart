@@ -49,7 +49,7 @@ class _$ApiAuthenticationService extends ApiAuthenticationService {
   }
 
   Future<Response> launch(int accountId, String jwt) {
-    final $url = '/launch?{api[jwt]}&{parameters[id]}';
+    final $url = 'launch?{api[jwt]}&{parameters[id]}';
     final Map<String, dynamic> $params = {
       'parameters[id]': accountId,
       'api[jwt]': jwt

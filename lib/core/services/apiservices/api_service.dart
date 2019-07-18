@@ -18,14 +18,13 @@ abstract class ApiService extends ChopperService{
         _$ApiService()
       ],
       converter: JsonConverter(),
-      interceptors: [
-          HeadersInterceptor({"cookie":"cookie-value"}),
-      ]
     );
 
     return _$ApiService(client);
   }
   
+  @Get(path : 'capture')
+  Future<Response> directAuthentication();
   
   @Get(path: '00000053-a2ca8401-jxrtagdj/core/user')
   Future<Response> getCurrentUser();
