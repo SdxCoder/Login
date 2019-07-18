@@ -14,7 +14,10 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:flushbar/flushbar.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key key}) : super(key: key);
+  final double margins;
+  final double gutters;
+  final int columns;
+  const LoginView({Key key, this.margins, this.gutters, this.columns}) : super(key: key);
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -23,9 +26,15 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  Screen _screen;
-  double _width;
-  double _height;
+
+
+  @override
+  void initState() { 
+    super.initState();
+     SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+  ]);
+  }
 
   Widget _AppBar(BuildContext context) {
     AppBar _appBar = AppBar(
@@ -36,13 +45,15 @@ class _LoginViewState extends State<LoginView> {
           child: Center(
               child: InkWell(
                   borderRadius: BorderRadius.circular(50),
-                  splashColor: splashColor,
                   onTap: () {},
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Add manager account",
-                      style: actionTextStyle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .body1
+                          .copyWith(color: Theme.of(context).accentColor),
                     ),
                   ))),
         )
@@ -54,58 +65,52 @@ class _LoginViewState extends State<LoginView> {
         child: _appBar,
       );
     }
-    _height = MediaQuery.of(context).size.height - _appBar.preferredSize.height;
     return _appBar;
   }
 
   @override
   Widget build(BuildContext context) {
-    _width = MediaQuery.of(context).size.width;
-    _height = MediaQuery.of(context).size.height;
+    Grid(context, widget.gutters, widget.margins, widget.columns);
 
     return BaseWidget(
-        model: LoginViewModel(authenticationService: Provider.of(context)),
+        model: LoginViewModel(
+            authenticationService: Provider.of(context),
+            connectivityService: Provider.of(context)),
         child: null,
         builder: (context, model, child) {
           return Scaffold(
               appBar: _AppBar(context),
-              backgroundColor: primaryColor,
               body: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Stack(
                   children: <Widget>[
                     Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: _height * 0.03),
+                      child: Container(
+                        width: Grid.giveColSpan(4),
                         child: Column(
                           children: <Widget>[
-                            SizedBox(
-                              height: _height * 0.07,
-                            ),
+                          
                             Image.asset(
                               'images/receptionist.png',
-                              width: _width * 0.5,
-                              height: _height * 0.3,
+                              width: Grid.giveColSpan(3, increaseBy: 30)
+                              
                             ),
                             SizedBox(
-                              height: _height * 0.03,
+                              height: widget.gutters,
                             ),
                             Center(
-                              child: Text(
-                                " Log in with your \nmanager account",
-                                style: startupMessageTextStyle,
-                              ),
+                              child: Text(" Log in with your \nmanager account",
+                                  style: Theme.of(context).textTheme.display1),
                             ),
                             SizedBox(
-                              height: _height * 0.07,
+                              height: widget.gutters,
                             ),
                             _loginForm(model, context),
                             SizedBox(
-                              height: _height * 0.03,
+                              height: widget.gutters,
                             ),
                             InkWell(
                                 borderRadius: BorderRadius.circular(50),
-                                splashColor: splashColor,
                                 onTap: () {},
                                 child: Container(
                                   width: 200,
@@ -113,21 +118,27 @@ class _LoginViewState extends State<LoginView> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(
-                                  "Forget account details",
-                                  style: actionTextStyle,
-                                ),
+                                        "Forget account details",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .body1
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .accentColor),
+                                      ),
                                     ),
                                   ),
                                 )),
+                                SizedBox(height: widget.gutters,)
                           ],
+                        
                         ),
                       ),
                     ),
                     Positioned(
                       bottom: 8,
-                      right: _width * 0.1,
+                      right: Grid.gutter,
                       child: IconButton(
-                        splashColor: primaryColorDark,
                         onPressed: () {},
                         icon: Image.asset('images/settings.png'),
                       ),
@@ -145,49 +156,49 @@ class _LoginViewState extends State<LoginView> {
       child: Column(
         children: <Widget>[
           Container(
-            width: _width * 0.65,
-            child: TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                  hintText: "E-mail",
-                  hintStyle: hintTextStyle,
-                  fillColor: Colors.white,
-                  filled: true,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      borderSide: BorderSide.none)),
+            child: Theme(
+              data: themeData.copyWith(splashColor: Colors.transparent),
+              child: TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                    hintText: "E-mail",
+                    fillColor: Colors.white,
+                    filled: true,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: BorderSide.none)),
+              ),
             ),
           ),
           SizedBox(
-            height: _height * 0.02,
+            height: widget.gutters,
           ),
           Container(
-            width: _width * 0.65,
-            child: TextFormField(
-              obscureText: true,
-              controller: _passwordController,
-              decoration: InputDecoration(
-                  hintText: "Password",
-                  hintStyle: hintTextStyle,
-                  fillColor: Colors.white,
-                  filled: true,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      borderSide: BorderSide.none)),
+            child: Theme(
+              data: themeData.copyWith(splashColor: Colors.transparent),
+              child: TextFormField(
+                obscureText: true,
+                controller: _passwordController,
+                decoration: InputDecoration(
+                    hoverColor: Colors.transparent,
+                    hintText: "Password",
+                    fillColor: Colors.white,
+                    filled: true,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: BorderSide.none)),
+              ),
             ),
           ),
           SizedBox(
-            height: _height * 0.02,
+            height: widget.gutters,
           ),
           Container(
-            width: _width * 0.65,
             child: RaisedButton(
-              color: secondaryColor,
-              disabledColor: secondaryColor.withAlpha(200),
               padding: EdgeInsets.symmetric(
                   horizontal: 20, vertical: model.buzy ? 8.5 : 14),
               shape: RoundedRectangleBorder(
@@ -197,10 +208,19 @@ class _LoginViewState extends State<LoginView> {
                   ? null
                   : () async {
                       SystemChannels.textInput.invokeMethod('TextInput.hide');
+
+                      var hasNetwork = await model.checkConnectivity();
+
+                      if(!hasNetwork){
+                        NotificationService.networkError(context);
+                        return;
+                      }
+
                       var isAthenticated = await model.login(
                           _emailController.text, _passwordController.text);
+
                       if (isAthenticated) {
-                        NotificationService.loginSuccess()..show(context);
+                        NotificationService.loginSuccess(context);
 
                         model.setCounter(0);
 
@@ -209,9 +229,9 @@ class _LoginViewState extends State<LoginView> {
                         _passwordController.clear();
                       } else {
                         if (model.loginTries > 3) {
-                          NotificationService.tooManyTries()..show(context);
+                          NotificationService.tooManyTries(context);
                         } else {
-                          NotificationService.loginError()..show(context);
+                          NotificationService.loginError(context);
                         }
                       }
                     },
@@ -230,7 +250,7 @@ class _LoginViewState extends State<LoginView> {
                       children: <Widget>[
                         Text(
                           "Log-in",
-                          style: btnTextStyleLight,
+                          style: Theme.of(context).textTheme.button,
                         ),
                         SizedBox(
                           width: 10,

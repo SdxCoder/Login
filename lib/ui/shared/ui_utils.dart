@@ -1,6 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+class Grid {
+  static double _gutter;
+  static double _margin;
+  static int _columns;
+  static double _colSpaceExcludingMargin;
+  static double _singleColSpan;
+
+
+  static double get gutter => _gutter;
+  static double get margin => _margin;
+  static int get columns => _columns;
+
+  Grid(BuildContext context, double gutter,double margin, int totalCols){
+    _gutter = gutter;
+    _margin = margin;
+    _columns = totalCols;
+    _calculateColSpaceExcludingMargin(context, gutter,margin, totalCols);
+  }
+
+
+  static double _calculateColSpaceExcludingMargin(
+      BuildContext context, double gutter, double margin, int totalCols) {
+    var width = MediaQuery.of(context).size.width;
+    var totalMarginSpace = margin * 2;
+    var totalGutterSpace = (totalCols - 1) * _gutter;
+    var allColsSpace = width - totalMarginSpace - totalGutterSpace;
+    _singleColSpan = allColsSpace / totalCols;
+  }
+
+
+
+  static double giveColSpan(int cols,{
+    double increaseBy = 0.0,
+    double reduceBy = 0.0
+  }) {
+  
+    return (_singleColSpan * cols ) + increaseBy - reduceBy;
+  }
+}
+
 class Screen {
   final BuildContext context;
   AppBar _appBar;
@@ -108,12 +148,11 @@ class Screen {
     _height = MediaQuery.of(context).size.height - _appBar.preferredSize.height;
 
     _oreintation = MediaQuery.of(context).orientation;
-  
-    _calculateFlexibleGrid();
 
+    _calculateFlexibleGrid();
   }
 
-  Screen.withoutAppBar(this.context){
+  Screen.withoutAppBar(this.context) {
     _width = MediaQuery.of(context).size.width;
 
     _height = MediaQuery.of(context).size.height;
@@ -121,19 +160,17 @@ class Screen {
     _oreintation = MediaQuery.of(context).orientation;
 
     _calculateFlexibleGrid();
-
   }
 
-  _calculateFlexibleGrid(){
+  _calculateFlexibleGrid() {
+    _blockHeight = _height / 12;
+    _blockWidth = _width / 12;
 
-    _blockHeight = _height/12;
-    _blockWidth = _width/12;
+    _horizontalPadding = 1 / _width;
+    _verticalPadding = 1 / _height;
 
-    _horizontalPadding = 1/_width;
-    _verticalPadding = 1/_height;
-
-    _horizontalMargin = 1/_width;
-    _verticalMargin = 1/_height;
+    _horizontalMargin = 1 / _width;
+    _verticalMargin = 1 / _height;
 
     _row1 = blockHeight;
     _row2 = blockHeight * 2;
@@ -160,6 +197,5 @@ class Screen {
     _col10 = blockWidth * 10;
     _col11 = blockWidth * 11;
     _col12 = blockWidth * 12;
-    
   }
 }

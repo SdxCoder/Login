@@ -4,31 +4,70 @@ import 'package:flushbar/flushbar.dart';
 
 import 'app_theme.dart';
 
+enum NotificationType { INFO, ACTION }
+
 class NotificationService {
+  
+  static Flushbar notification(
+      BuildContext context, String titleText, String messageText,
+      {NotificationType notificationType = NotificationType.ACTION}) {
 
-
-  static Flushbar loginError() {
     Flushbar flush;
-    return flush = Flushbar(
-      titleText: Text(
-        "Login Error",
-        style: TextStyle(
+
+    if (notificationType == NotificationType.INFO) {
+      return flush = Flushbar(
+        titleText: Text(
+          titleText,
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
-            color: primaryColor,
-           ),
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        messageText: Text(
+          messageText,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        flushbarStyle: FlushbarStyle.FLOATING,
+        flushbarPosition: FlushbarPosition.TOP,
+        aroundPadding: EdgeInsets.all(8),
+        overlayBlur: 0.0001,
+        overlayColor: overlayColor,
+        borderRadius: 8,
+        reverseAnimationCurve: Curves.decelerate,
+        forwardAnimationCurve: Curves.elasticOut,
+        icon: Icon(
+          Icons.error,
+          color: Theme.of(context).primaryColor,
+        ),
+        duration: Duration(seconds: 3),
+      )..show(context);
+    }
+    return flush = Flushbar(
+      titleText: Text(
+        titleText,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          color: Theme.of(context).primaryColor,
+        ),
       ),
       messageText: Text(
-        "Wrong e-mail or password.\nTry-Again!",
-        style:
-            TextStyle(color: Colors.white,),
+        messageText,
+        style: TextStyle(
+          color: Colors.white,
+        ),
       ),
       mainButton: FlatButton(
-        onPressed: () {
-          flush.dismiss(true);
-        },
-        child: Text("DISMIS", style: btnTextStyleBold,)
-      ),
+          onPressed: () {
+            flush.dismiss(true);
+          },
+          child: Text(
+            "DISMIS",
+            style: Theme.of(context).textTheme.button,
+          )),
       flushbarStyle: FlushbarStyle.FLOATING,
       flushbarPosition: FlushbarPosition.TOP,
       aroundPadding: EdgeInsets.all(8),
@@ -39,76 +78,27 @@ class NotificationService {
       forwardAnimationCurve: Curves.elasticOut,
       icon: Icon(
         Icons.error,
-        color: primaryColor,
+        color: Theme.of(context).primaryColor,
       ),
       duration: Duration(seconds: 3),
-    );
+    )..show(context);
   }
 
-
-  static Flushbar loginSuccess() {
-    Flushbar flush;
-    return flush = Flushbar(
-      titleText: Text(
-        "Success",
-        style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: primaryColor,
-            fontFamily: "ShadowsIntoLightTwo"),
-      ),
-      messageText: Text("Logged-in successfully!", style: TextStyle(color: Colors.white),),
-      flushbarStyle: FlushbarStyle.FLOATING,
-      flushbarPosition: FlushbarPosition.TOP,
-      aroundPadding: EdgeInsets.all(8),
-      overlayBlur: 0.0001,
-      overlayColor: overlayColor,
-      borderRadius: 8,
-      reverseAnimationCurve: Curves.decelerate,
-      forwardAnimationCurve: Curves.elasticOut,
-      icon: Icon(
-        Icons.check_circle,
-        color: primaryColor,
-      ),
-      duration: Duration(seconds: 3),
-    );
+  static Flushbar loginError(BuildContext context) {
+    notification(
+        context, "Login Error", "Wrong e-mail or password.\nTry-Again!");
   }
 
-
-  static Flushbar tooManyTries() {
-    Flushbar flush;
-    return flush = Flushbar(
-      titleText: Text(
-        "Error",
-        style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: primaryColor,
-            fontFamily: "ShadowsIntoLightTwo"),
-      ),
-      messageText: Text("Forgotten Account Details? ", style: TextStyle(color: Colors.white) ),
-      mainButton: FlatButton(
-        onPressed: () {
-          flush.dismiss(true);
-        },
-        child: Text("DISMIS", style: btnTextStyleBold,)
-      ),
-      flushbarStyle: FlushbarStyle.FLOATING,
-      flushbarPosition: FlushbarPosition.TOP,
-      aroundPadding: EdgeInsets.all(8),
-      overlayBlur: 0.0001,
-      overlayColor: overlayColor,
-      borderRadius: 8,
-      reverseAnimationCurve: Curves.decelerate,
-      forwardAnimationCurve: Curves.slowMiddle,
-      icon: Icon(
-        Icons.error,
-        color: primaryColor,
-      ),
-      duration: Duration(seconds: 3),
-    );
+  static Flushbar loginSuccess(BuildContext context) {
+    notification(context, "Success", "Logged-in successfully!", notificationType: NotificationType.INFO);
   }
 
+  static Flushbar tooManyTries(BuildContext context) {
+    notification(context, "Error", "Forgotten Account Details? ");
+  }
 
-
+  static Flushbar networkError(BuildContext context) {
+    notification(
+        context, "Netwrok Error", "An unknown netwrok error has occoured!");
+  }
 }

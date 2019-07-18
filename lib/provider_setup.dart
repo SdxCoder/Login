@@ -1,5 +1,6 @@
 import 'package:erply_assignment/core/services/apiservices/api_authentication_service.dart';
 import 'package:erply_assignment/core/services/viewmodelservices/authentication_service.dart';
+import 'package:erply_assignment/core/services/viewmodelservices/connectivity_service.dart';
 import 'package:provider/provider.dart';
 
 /**
@@ -22,6 +23,9 @@ List<SingleChildCloneableWidget> independentServices = [
 
   Provider.value(
     value: ApiAuthenticationService.create(),
+  ),
+  Provider.value(
+    value: ConnectivityService(),
   )
 ];
 
@@ -37,7 +41,8 @@ List<SingleChildCloneableWidget> dependentServices = [
   ProxyProvider<ApiAuthenticationService, AuthenticationService>(
       builder: (context, api, authenticationService) {
     return AuthenticationService(api: api);
-  })
+  }),
+  
 
 ];
 

@@ -1,12 +1,8 @@
 
-import 'package:erply_assignment/core/services/apiservices/api_authentication_service.dart';
-import 'package:erply_assignment/core/services/apiservices/api_launch_app_service.dart';
 import 'package:erply_assignment/provider_setup.dart';
 import 'package:erply_assignment/ui/shared/app_theme.dart';
-import 'package:erply_assignment/ui/shared/app_theme.dart' as prefix0;
 import 'package:erply_assignment/ui/views/login_view.dart';
 import 'package:flutter/material.dart';
-import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -18,9 +14,7 @@ class MyApp extends StatelessWidget {
       providers: providers,
       child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-             primaryColor: primaryColor
-            ),
+            theme: themeData,
             home: LayoutPanel()),
     );
   }
@@ -34,9 +28,20 @@ class LayoutPanel extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         if (constraints.maxWidth < 600) {
-          return LoginView();
-        } else {
-          return Center(child: Text("Tablet"));
+          print(constraints.maxWidth);
+          return LoginView(margins: 16, gutters: 16, columns: 4,);
+        } 
+
+        if(constraints.maxWidth < 720){
+          return LoginView(margins: 16, gutters: 16, columns: 8,);
+        }
+
+        if(constraints.maxWidth < 840){
+          return LoginView(margins: 24, gutters: 24, columns: 8,);
+        }
+
+        if(constraints.maxWidth > 840){
+           return LoginView(margins: 24, gutters: 24, columns: 12,);
         }
       },
     );

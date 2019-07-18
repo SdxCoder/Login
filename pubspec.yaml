@@ -17,6 +17,7 @@ dependencies:
   built_collection:
   overlay_support: ^1.0.0
   flushbar:
+  connectivity:
 
   cupertino_icons: ^0.1.2
 
@@ -35,6 +36,7 @@ flutter:
   uses-material-design: true
   assets: 
     - images/receptionist.png
+    - images/receptionist.svg
     - images/key.png
     - images/settings.png
 
